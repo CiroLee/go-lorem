@@ -1,8 +1,9 @@
 package utils
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetDecimalPartLen(t *testing.T) {
@@ -14,4 +15,13 @@ func TestGetDecimalPartLen(t *testing.T) {
 
 	is.Equal(len1, 2)
 	is.Equal(len2, 0)
+}
+
+func TestCapitalize(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	r := Capitalize("hello world")
+	is.Equal(r, "Hello world")
+
 }
