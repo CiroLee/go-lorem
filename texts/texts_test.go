@@ -56,5 +56,26 @@ func TestParagraph(t *testing.T) {
 
 	is.Equal(len(s1Arr), 3)
 	is.Equal(len(s2Arr), 3)
+}
 
+func TestName(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	en := Name("en", true)
+	cn := Name("zh", false)
+
+	is.True(unicode.Is(unicode.Han, []rune(cn)[0]))
+	is.True(unicode.Is(unicode.Latin, []rune(en)[0]))
+}
+
+func TestStr(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	s1 := Str(6)
+	s2 := Str(0)
+
+	is.Equal(len(s1), 6)
+	is.Equal(len(s2), 4)
 }

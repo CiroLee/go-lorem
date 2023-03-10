@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// GetDecimalPartLen get the length of the decimal part of a number
+// get the length of the decimal part of a number
 func GetDecimalPartLen[T float64 | float32](num T) int {
 	tmp := strings.Split(fmt.Sprintf("%v", num), ".")
 	if len(tmp) <= 1 {
@@ -14,7 +14,7 @@ func GetDecimalPartLen[T float64 | float32](num T) int {
 	return len(tmp[1])
 }
 
-// Capitalize change the first letter of the string to upper
+// change the first letter of the string to upper
 func Capitalize(s string) string {
 	var r []rune
 	var rs = []rune(s)

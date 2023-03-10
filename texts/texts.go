@@ -15,6 +15,7 @@ type BaseProps struct {
 	Lang string
 }
 
+// return a random letter
 func Letter(lang string) string {
 	var source []string
 	if lang == "en" {
@@ -26,6 +27,7 @@ func Letter(lang string) string {
 	return source[index]
 }
 
+// return a random word
 func Word(props BaseProps) string {
 	var str string
 	var length uint = 2
@@ -38,6 +40,7 @@ func Word(props BaseProps) string {
 	return str
 }
 
+// return a random sentence
 func Sentence(props BaseProps) string {
 	var str string
 	var length = 1
@@ -58,6 +61,7 @@ func Sentence(props BaseProps) string {
 	return utils.Capitalize(strings.TrimRight(str, trail))
 }
 
+// return a random paragraph
 func Paragraph(props BaseProps) string {
 	var str string
 	var length = 1
@@ -74,6 +78,35 @@ func Paragraph(props BaseProps) string {
 			Num:  uint(num),
 			Lang: props.Lang,
 		}) + trail
+	}
+	return str
+}
+
+// return a name
+func Name(lang string, upper bool) string {
+	var source []string
+	if lang == "en" {
+		source = constants.COMMON_EN_NAMES
+	} else {
+		source = constants.COMMON_ZH_NAMES
+	}
+	index, _ := core.RandomInteger(0, len(source)-1)
+	if upper {
+		return utils.Capitalize(source[index])
+	}
+	return source[index]
+}
+
+func Str(length uint) string {
+	var str string
+	s := []rune(constants.STRINGS)
+	lens := 4
+	if length > 0 {
+		lens = int(length)
+	}
+	for i := 0; i < lens; i++ {
+		index, _ := core.RandomInteger(0, len(s)-1)
+		str += string(s[index])
 	}
 	return str
 }
