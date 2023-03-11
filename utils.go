@@ -1,4 +1,4 @@
-package utils
+package lorem
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 )
 
 // get the length of the decimal part of a number
-func GetDecimalPartLen[T float64 | float32](num T) int {
+func getDecimalPartLen[T float64 | float32](num T) int {
 	tmp := strings.Split(fmt.Sprintf("%v", num), ".")
 	if len(tmp) <= 1 {
 		return 0
@@ -15,7 +15,7 @@ func GetDecimalPartLen[T float64 | float32](num T) int {
 }
 
 // change the first letter of the string to upper
-func Capitalize(s string) string {
+func capitalize(s string) string {
 	var r []rune
 	var rs = []rune(s)
 	for i, v := range rs {

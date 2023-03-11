@@ -1,4 +1,4 @@
-package core
+package lorem
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 )
 
 // generate random integer
-func RandomInteger(min, max int) (int, error) {
+func randomInteger(min, max int) (int, error) {
 	rand.New(rand.NewSource(time.Now().UnixNano()))
 	if max <= min {
 		return 0, fmt.Errorf("min must be less than max. min: %d, max: %d", min, max)
@@ -18,7 +18,7 @@ func RandomInteger(min, max int) (int, error) {
 }
 
 // generate random float64 number
-func RandomFloat(min, max int, decimal int) (float64, error) {
+func randomFloat(min, max int, decimal int) (float64, error) {
 	if max <= min {
 		return 0.0, fmt.Errorf("min must be less than max. min: %d, max: %d", min, max)
 	}

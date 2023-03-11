@@ -4,8 +4,6 @@ import (
 	"strings"
 
 	"github.com/CiroLee/go-lorem/constants"
-	"github.com/CiroLee/go-lorem/core"
-	"github.com/CiroLee/go-lorem/utils"
 )
 
 const BASE_NUM = 14
@@ -23,7 +21,7 @@ func Letter(lang string) string {
 	} else {
 		source = constants.ZH_CHARACTERS
 	}
-	index, _ := core.RandomInteger(0, len(source)-1)
+	index, _ := randomInteger(0, len(source)-1)
 	return source[index]
 }
 
@@ -52,13 +50,13 @@ func Sentence(props BaseProps) string {
 		trail = " "
 	}
 	for i := 0; i < length; i++ {
-		num, _ := core.RandomInteger(2, BASE_NUM)
+		num, _ := randomInteger(2, BASE_NUM)
 		str += Word(BaseProps{
 			Lang: props.Lang,
 			Num:  uint(num),
 		}) + trail
 	}
-	return utils.Capitalize(strings.TrimRight(str, trail))
+	return capitalize(strings.TrimRight(str, trail))
 }
 
 // return a random paragraph
@@ -73,7 +71,7 @@ func Paragraph(props BaseProps) string {
 		trail = "."
 	}
 	for i := 0; i < length; i++ {
-		num, _ := core.RandomInteger(1, BASE_NUM)
+		num, _ := randomInteger(1, BASE_NUM)
 		str += Sentence(BaseProps{
 			Num:  uint(num),
 			Lang: props.Lang,
@@ -90,9 +88,9 @@ func Name(lang string, upper bool) string {
 	} else {
 		source = constants.COMMON_ZH_NAMES
 	}
-	index, _ := core.RandomInteger(0, len(source)-1)
+	index, _ := randomInteger(0, len(source)-1)
 	if upper {
-		return utils.Capitalize(source[index])
+		return capitalize(source[index])
 	}
 	return source[index]
 }
@@ -105,7 +103,7 @@ func Str(length uint) string {
 		lens = int(length)
 	}
 	for i := 0; i < lens; i++ {
-		index, _ := core.RandomInteger(0, len(s)-1)
+		index, _ := randomInteger(0, len(s)-1)
 		str += string(s[index])
 	}
 	return str
