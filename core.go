@@ -18,17 +18,17 @@ func randomInteger(min, max int) (int, error) {
 }
 
 // generate random float64 number
-func randomFloat(min, max int, decimal int) (float64, error) {
+func randomFloat(min, max float64, decimal uint) (float64, error) {
 	if max <= min {
-		return 0.0, fmt.Errorf("min must be less than max. min: %d, max: %d", min, max)
+		return 0.0, fmt.Errorf("min must be less than max. min: %v, max: %v", min, max)
 	}
 	d := math.Pow10(4)
 	if decimal > 0 {
-		d = math.Pow10(decimal)
+		d = math.Pow10(int(decimal))
 	}
 
 	rand.New(rand.NewSource(time.Now().UnixNano()))
-	random := rand.Float64() * (float64(max) - float64(min))
+	random := rand.Float64() * (max - min)
 	temp := strconv.FormatFloat(math.Trunc(random*d)/d, 'f', -1, 64)
 	num, _ := strconv.ParseFloat(temp, 64)
 	return num, nil
