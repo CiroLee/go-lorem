@@ -6,12 +6,7 @@ import (
 	"github.com/CiroLee/go-lorem/constants"
 )
 
-const BASE_NUM = 14
-
-type BaseProps struct {
-	Num  uint
-	Lang string
-}
+const baseNum = 14
 
 // return a random letter
 func Letter(lang string) string {
@@ -26,56 +21,50 @@ func Letter(lang string) string {
 }
 
 // return a random word
-func Word(props BaseProps) string {
+func Word(num uint, lang string) string {
 	var str string
 	var length uint = 2
-	if props.Num > 0 {
-		length = props.Num
+	if num > 0 {
+		length = num
 	}
 	for i := 0; i < int(length); i++ {
-		str += Letter(props.Lang)
+		str += Letter(lang)
 	}
 	return str
 }
 
 // return a random sentence
-func Sentence(props BaseProps) string {
+func Sentence(num uint, lang string) string {
 	var str string
-	var length = 1
+	var length uint = 1
 	trail := "，"
-	if props.Num > 0 {
-		length = int(props.Num)
+	if num > 0 {
+		length = num
 	}
-	if props.Lang == "en" {
+	if lang == "en" {
 		trail = " "
 	}
-	for i := 0; i < length; i++ {
-		num, _ := randomInteger(2, BASE_NUM)
-		str += Word(BaseProps{
-			Lang: props.Lang,
-			Num:  uint(num),
-		}) + trail
+	for i := 0; i < int(length); i++ {
+		num, _ := randomInteger(2, baseNum)
+		str += Word(uint(num), lang) + trail
 	}
 	return capitalize(strings.TrimRight(str, trail))
 }
 
 // return a random paragraph
-func Paragraph(props BaseProps) string {
+func Paragraph(num uint, lang string) string {
 	var str string
-	var length = 1
+	var length uint = 1
 	trail := "。"
-	if props.Num > 0 {
-		length = int(props.Num)
+	if num > 0 {
+		length = num
 	}
-	if props.Lang == "en" {
+	if lang == "en" {
 		trail = "."
 	}
-	for i := 0; i < length; i++ {
-		num, _ := randomInteger(1, BASE_NUM)
-		str += Sentence(BaseProps{
-			Num:  uint(num),
-			Lang: props.Lang,
-		}) + trail
+	for i := 0; i < int(length); i++ {
+		num, _ := randomInteger(1, baseNum)
+		str += Sentence(uint(num), lang) + trail
 	}
 	return str
 }

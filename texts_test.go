@@ -23,8 +23,8 @@ func TestWord(t *testing.T) {
 	t.Parallel()
 	is := assert.New(t)
 
-	r1 := Word(BaseProps{})
-	r2 := Word(BaseProps{Num: 4, Lang: "en"})
+	r1 := Word(2, "zh")
+	r2 := Word(4, "en")
 
 	is.True(unicode.Is(unicode.Han, []rune(r1)[0]))
 	is.Equal(len(r1), 6)
@@ -36,9 +36,9 @@ func TestSentence(t *testing.T) {
 	t.Parallel()
 	is := assert.New(t)
 
-	s1 := Sentence(BaseProps{Num: 2})
+	s1 := Sentence(2, "zh")
 	s1Arr := strings.Split(s1, "，")
-	s2 := Sentence(BaseProps{Num: 2, Lang: "en"})
+	s2 := Sentence(2, "en")
 	s2Arr := strings.Split(s2, " ")
 
 	is.Equal(len(s1Arr), 2)
@@ -49,9 +49,9 @@ func TestParagraph(t *testing.T) {
 	t.Parallel()
 	is := assert.New(t)
 
-	s1 := Paragraph(BaseProps{Num: 2})
+	s1 := Paragraph(2, "zh")
 	s1Arr := strings.Split(s1, "。")
-	s2 := Paragraph(BaseProps{Num: 2, Lang: "en"})
+	s2 := Paragraph(2, "en")
 	s2Arr := strings.Split(s2, ".")
 
 	is.Equal(len(s1Arr), 3)
