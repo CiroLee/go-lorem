@@ -6,7 +6,7 @@ import (
 	"github.com/CiroLee/go-lorem/constants"
 )
 
-const baseNum = 14
+const baseNum = 10
 
 // return a random letter
 func Letter(lang string) string {
@@ -84,6 +84,7 @@ func Name(lang string, upper bool) string {
 	return source[index]
 }
 
+// return a random string
 func Str(length uint) string {
 	var str string
 	s := []rune(constants.STRINGS)

@@ -2,8 +2,10 @@ package lorem
 
 import (
 	"strconv"
+	"strings"
 	"testing"
 	"time"
+	"unicode"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -31,4 +33,30 @@ func TestDate(t *testing.T) {
 
 	is.True(from.Before(d))
 	is.True(end.After(d))
+}
+
+func TestWeek(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	w1 := Week("en", false)
+	w2 := Week("en", true)
+	w3 := Week("zh", false)
+
+	is.True(unicode.Is(unicode.Latin, []rune(w1)[0]))
+	is.True(strings.Contains(w2, "."))
+	is.True(unicode.Is(unicode.Han, []rune(w3)[0]))
+}
+
+func TestMonth(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	w1 := Month("en", false)
+	w2 := Month("en", true)
+	w3 := Month("zh", false)
+
+	is.True(unicode.Is(unicode.Latin, []rune(w1)[0]))
+	is.True(strings.Contains(w2, "."))
+	is.True(unicode.Is(unicode.Han, []rune(w3)[0]))
 }
