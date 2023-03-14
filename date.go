@@ -7,6 +7,18 @@ type multiDateStruct struct {
 	en [2]string
 }
 
+const (
+	DefaultLayout      = "2006-01-02 15:04:05"
+	ReverseLayout      = "15:04:05 01-02-2006"
+	SlashLayout        = "2006/01/02 15:04:05"
+	ZhLayout           = "2006年01月02日 15时04分05秒"
+	OnlyYMDLayout      = "2006-01-02"
+	OnlyYMDSlashLayout = "2006/01/02"
+	OnlyHMSLayout      = "15:04:05"
+	OnlyYMDZhLayout    = "2006年01月02日"
+	OnlyHMSZhLayout    = "15时04分05秒"
+)
+
 var weekMap = [7]multiDateStruct{
 	{
 		zh: "一",
@@ -107,6 +119,12 @@ func Timestamp(from, to time.Time, format string) int {
 // return a random UTC date
 func Date(from, to time.Time) time.Time {
 	return dateRange(from, to)
+}
+
+// return a format date via layout
+func FormatDate(from, to time.Time, layout string) string {
+	t := Date(from, to)
+	return t.Format(layout)
 }
 
 // return a random week support Chinese and English

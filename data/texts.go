@@ -1,4 +1,4 @@
-package constants
+package data
 
 var ZH_CHARACTERS []string = []string{
 	"一",

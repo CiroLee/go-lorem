@@ -60,3 +60,13 @@ func TestMonth(t *testing.T) {
 	is.True(strings.Contains(w2, "."))
 	is.True(unicode.Is(unicode.Han, []rune(w3)[0]))
 }
+
+func TestFormatDate(t *testing.T) {
+	is := assert.New(t)
+
+	from := time.Date(2022, time.Month(1), 1, 0, 0, 0, 0, time.Now().Location())
+	to := time.Date(2023, time.Month(12), 31, 0, 0, 0, 0, time.Now().Location())
+
+	fd := FormatDate(from, to, SlashLayout)
+	is.True(strings.Contains(fd, "/"))
+}

@@ -13,19 +13,3 @@ func getDecimalPartLen[T float64 | float32](num T) int {
 	}
 	return len(tmp[1])
 }
-
-// change the first letter of the string to upper
-func capitalize(s string) string {
-	var r []rune
-	var rs = []rune(s)
-	for i, v := range rs {
-		if i == 0 {
-			f := strings.ToUpper(string(v))
-			r = append(r, []rune(f)[0])
-		} else {
-			r = append(r, v)
-		}
-	}
-
-	return string(r)
-}

@@ -3,7 +3,8 @@ package lorem
 import (
 	"strings"
 
-	"github.com/CiroLee/go-lorem/constants"
+	"github.com/CiroLee/gear/gearstring"
+	"github.com/CiroLee/go-lorem/data"
 )
 
 const baseNum = 10
@@ -12,9 +13,9 @@ const baseNum = 10
 func Letter(lang string) string {
 	var source []string
 	if lang == "en" {
-		source = constants.ALPHABET
+		source = data.ALPHABET
 	} else {
-		source = constants.ZH_CHARACTERS
+		source = data.ZH_CHARACTERS
 	}
 	index, _ := randomInteger(0, len(source)-1)
 	return source[index]
@@ -48,7 +49,7 @@ func Sentence(num uint, lang string) string {
 		num, _ := randomInteger(2, baseNum)
 		str += Word(uint(num), lang) + trail
 	}
-	return capitalize(strings.TrimRight(str, trail))
+	return gearstring.ToUpperCase(strings.TrimRight(str, trail))
 }
 
 // return a random paragraph
@@ -73,13 +74,13 @@ func Paragraph(num uint, lang string) string {
 func Name(lang string, upper bool) string {
 	var source []string
 	if lang == "en" {
-		source = constants.COMMON_EN_NAMES
+		source = data.COMMON_EN_NAMES
 	} else {
-		source = constants.COMMON_ZH_NAMES
+		source = data.COMMON_ZH_NAMES
 	}
 	index, _ := randomInteger(0, len(source)-1)
 	if upper {
-		return capitalize(source[index])
+		return gearstring.ToUpperCase(source[index])
 	}
 	return source[index]
 }
@@ -87,7 +88,7 @@ func Name(lang string, upper bool) string {
 // return a random string
 func Str(length uint) string {
 	var str string
-	s := []rune(constants.STRINGS)
+	s := []rune(data.STRINGS)
 	lens := 4
 	if length > 0 {
 		lens = int(length)

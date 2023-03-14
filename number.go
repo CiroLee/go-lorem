@@ -14,7 +14,7 @@ func Int(min, max int) (int, error) {
 	return randomInteger(min, max)
 }
 
-// return a random float32 number
+// return a random float32 number between min and max.And include max
 func Float32(min, max float32, decimal uint) (float32, error) {
 	r, err := randomFloat(float64(min), float64(max), decimal)
 	if err != nil {
@@ -23,7 +23,7 @@ func Float32(min, max float32, decimal uint) (float32, error) {
 	return float32(r), nil
 }
 
-// return a random float64 number
+// return a random float64 number between min and max.Note: not include max
 func Float64(min, max float64, decimal uint) (float64, error) {
 	return randomFloat(min, max, decimal)
 }

@@ -14,7 +14,7 @@ func randomInteger(min, max int) (int, error) {
 	if max <= min {
 		return 0, fmt.Errorf("min must be less than max. min: %d, max: %d", min, max)
 	}
-	return rand.Intn(max-min) + min, nil
+	return rand.Intn(max-min+1) + min, nil
 }
 
 // generate random float64 number
@@ -28,8 +28,13 @@ func randomFloat(min, max float64, decimal uint) (float64, error) {
 	}
 
 	rand.New(rand.NewSource(time.Now().UnixNano()))
-	random := rand.Float64() * (max - min)
+	random := rand.Float64()*(max-min) + min
 	temp := strconv.FormatFloat(math.Trunc(random*d)/d, 'f', -1, 64)
 	num, _ := strconv.ParseFloat(temp, 64)
 	return num, nil
+}
+
+func randomElement[T any](arr []T) T {
+	index, _ := randomInteger(0, len(arr)-1)
+	return arr[index]
 }

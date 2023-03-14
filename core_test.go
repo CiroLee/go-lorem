@@ -3,6 +3,7 @@ package lorem
 import (
 	"testing"
 
+	"github.com/CiroLee/gear/gearslice"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -44,4 +45,13 @@ func TestRandomFloat(t *testing.T) {
 	is.Nil(err3)
 	is.LessOrEqual(dLen2, 2)
 	is.Nil(err4)
+}
+
+func TestRandomElement(t *testing.T) {
+	is := assert.New(t)
+
+	arr := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	r := randomElement(arr)
+
+	is.True(gearslice.Includes(arr, r))
 }
