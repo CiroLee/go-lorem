@@ -19,9 +19,9 @@ func TestTimestamp(t *testing.T) {
 	t2 := Timestamp(from, end, "milli")
 	t3 := Timestamp(from, end, "nano")
 
-	is.Equal(len(strconv.Itoa(t1)), 10)
-	is.Equal(len(strconv.Itoa(t2)), 16)
-	is.Equal(len(strconv.Itoa(t3)), 19)
+	is.Len(strconv.Itoa(t1), 10)
+	is.Len(strconv.Itoa(t2), 16)
+	is.Len(strconv.Itoa(t3), 19)
 }
 
 func TestDate(t *testing.T) {

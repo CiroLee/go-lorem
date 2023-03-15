@@ -27,9 +27,9 @@ func TestWord(t *testing.T) {
 	r2 := Word(4, "en")
 
 	is.True(unicode.Is(unicode.Han, []rune(r1)[0]))
-	is.Equal(len(r1), 6)
+	is.Len(r1, 6)
 	is.True(unicode.Is(unicode.Latin, []rune(r2)[0]))
-	is.Equal(len(r2), 4)
+	is.Len(r2, 4)
 }
 
 func TestSentence(t *testing.T) {
@@ -41,8 +41,8 @@ func TestSentence(t *testing.T) {
 	s2 := Sentence(2, "en")
 	s2Arr := strings.Split(s2, " ")
 
-	is.Equal(len(s1Arr), 2)
-	is.Equal(len(s2Arr), 2)
+	is.Len(s1Arr, 2)
+	is.Len(s2Arr, 2)
 }
 
 func TestParagraph(t *testing.T) {
@@ -54,8 +54,8 @@ func TestParagraph(t *testing.T) {
 	s2 := Paragraph(2, "en")
 	s2Arr := strings.Split(s2, ".")
 
-	is.Equal(len(s1Arr), 3)
-	is.Equal(len(s2Arr), 3)
+	is.Len(s1Arr, 3)
+	is.Len(s2Arr, 3)
 }
 
 func TestName(t *testing.T) {
@@ -76,6 +76,16 @@ func TestStr(t *testing.T) {
 	s1 := Str(6)
 	s2 := Str(0)
 
-	is.Equal(len(s1), 6)
-	is.Equal(len(s2), 4)
+	is.Len(s1, 6)
+	is.Len(s2, 4)
+}
+
+func TestStrBySource(t *testing.T) {
+	is := assert.New(t)
+
+	source := "abcdefghijklmnopqrstuvwxyz"
+	s := StrBySource(4, source)
+
+	is.Len(s, 4)
+	is.True(unicode.Is(unicode.Latin, []rune(s)[0]))
 }

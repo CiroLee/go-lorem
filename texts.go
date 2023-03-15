@@ -7,8 +7,6 @@ import (
 	"github.com/CiroLee/go-lorem/data"
 )
 
-const baseNum = 10
-
 // return a random letter
 func Letter(lang string) string {
 	var source []string
@@ -21,7 +19,7 @@ func Letter(lang string) string {
 	return source[index]
 }
 
-// return a random word
+// return a random word. At least consists two letters
 func Word(num uint, lang string) string {
 	var str string
 	var length uint = 2
@@ -34,7 +32,7 @@ func Word(num uint, lang string) string {
 	return str
 }
 
-// return a random sentence
+// return a random sentence. At least consists one word
 func Sentence(num uint, lang string) string {
 	var str string
 	var length uint = 1
@@ -46,13 +44,13 @@ func Sentence(num uint, lang string) string {
 		trail = " "
 	}
 	for i := 0; i < int(length); i++ {
-		num, _ := randomInteger(2, baseNum)
+		num, _ := randomInteger(2, data.BaseNum)
 		str += Word(uint(num), lang) + trail
 	}
 	return gearstring.ToUpperCase(strings.TrimRight(str, trail))
 }
 
-// return a random paragraph
+// return a random paragraph. At lease consists one sentence
 func Paragraph(num uint, lang string) string {
 	var str string
 	var length uint = 1
@@ -64,7 +62,7 @@ func Paragraph(num uint, lang string) string {
 		trail = "."
 	}
 	for i := 0; i < int(length); i++ {
-		num, _ := randomInteger(1, baseNum)
+		num, _ := randomInteger(1, data.BaseNum)
 		str += Sentence(uint(num), lang) + trail
 	}
 	return str
@@ -87,8 +85,12 @@ func Name(lang string, upper bool) string {
 
 // return a random string
 func Str(length uint) string {
+	return StrBySource(length, data.STRINGS)
+}
+
+func StrBySource(length uint, source string) string {
 	var str string
-	s := []rune(data.STRINGS)
+	s := []rune(source)
 	lens := 4
 	if length > 0 {
 		lens = int(length)

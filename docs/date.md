@@ -27,6 +27,20 @@ to := time.Date(2023, time.Month(12), 23,59,59,0,0, time.Now().Location())
 
 lorem.Date(from, to) // 2023-05-07 17:00:02.878863734 +0000 UTC
 ```
+
+## FormatDate      
+return a format date via layout       
+signature:    
+```go
+func FormatDate(from, to time.Time, layout string) string
+```
+example:     
+```go
+from := time.Date(2023, time.Month(1), 1,0,0,0,0, time.Now().Location())
+to := time.Date(2023, time.Month(12), 23,59,59,0,0, time.Now().Location()) 
+// use built-in layout
+lorem.FormatDate(from, to, lorem.ZhLayout) // 2023年3月12日 15时04分05秒
+```go
 ## Week    
 return a random week day support Chinese, English, and English supports abbreviation if set `abbr` true    
 signature:   
