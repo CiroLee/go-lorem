@@ -69,3 +69,28 @@ func TestEmail(t *testing.T) {
 	email := Email()
 	is.Contains(email, "@")
 }
+
+func TestMobile(t *testing.T) {
+	is := assert.New(t)
+
+	m := Mobile()
+	is.Len(m, 11)
+}
+
+func TestMobileHideMiddle(t *testing.T) {
+	is := assert.New(t)
+
+	m := MobileHideMiddle()
+	is.Len(m, 11)
+	is.Equal(strings.Count(m, "*"), 4)
+}
+
+func TestLandline(t *testing.T) {
+	is := assert.New(t)
+
+	n := Landline()
+	r := strings.Split(n, "-")[1]
+
+	is.LessOrEqual(len(r), 8)
+	is.GreaterOrEqual(len(r), 7)
+}

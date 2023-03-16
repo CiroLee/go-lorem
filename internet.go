@@ -121,6 +121,43 @@ func Email() string {
 	random, _ := randomInteger(1, data.BaseNum)
 	name := StrBySource(uint(random), data.NUMBER_ALPHABET)
 	emailSuffix := randomElement(data.EMAIL_SUFFIX)
-
 	return name + "/" + emailSuffix
+}
+
+// return 11-digit Mainland China mobile number
+func Mobile() string {
+	start := randomElement(data.MESH_NUM)
+	var rest string
+	for i := 0; i < 8; i++ {
+		random, _ := randomInteger(0, 9)
+		rest += strconv.Itoa(random)
+	}
+	return strconv.Itoa(start) + rest
+}
+
+// return a 11-digit Mainland China hidden middle 4-digit mobile number
+func MobileHideMiddle() string {
+	start := randomElement(data.MESH_NUM)
+	var rest string
+	for i := 0; i < 4; i++ {
+		random, _ := randomInteger(0, 9)
+		rest += strconv.Itoa(random)
+	}
+	return strconv.Itoa(start) + "****" + rest
+}
+
+// return a random Chinese Mainland landline number
+func Landline() string {
+	var num string
+	boolean := randomElement([]bool{true, false})
+	areaNum := randomElement(data.TEL_AREA_NUM)
+	if boolean {
+		// random, _ := randomInteger(100000, 9999999)
+		random, _ := IntBy(7, true)
+		num = areaNum + "-" + strconv.Itoa(random)
+	} else {
+		random, _ := IntBy(8, true)
+		num = areaNum + "-" + strconv.Itoa(random)
+	}
+	return num
 }

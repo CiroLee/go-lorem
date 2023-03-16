@@ -19,6 +19,19 @@ example:
 ```go
 n,_ := lorem.Int(-10, 10) // -2
 ```
+
+## IntBy      
+return a random int via special digit. if set `positive` true, will return a positive int number, and set false, return a negative int number           
+signature:     
+```go
+func IntBy(digit uint, positive bool) (int, error)
+``` 
+example:    
+```go
+lorem.IntBy(3, true) // 235
+lorem.IntBy(3, false) // -374
+```
+
 ## Float32     
 return a random float32 number with `decimal` decimal places          
 signature:    

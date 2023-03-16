@@ -75,3 +75,36 @@ example:
 ```go
 lorem.Email() // g5mVoEWH3v/@foxmail.com
 ```
+
+## Mobile      
+return 11-digit Mainland China mobile number       
+signature:     
+```go
+func Mobile() string
+```
+example:    
+```go
+lorem.Mobile() // 13823984816
+```
+
+## MobileHideMiddle      
+return a 11-digit Mainland China hidden middle 4-digit mobile number              
+signature:     
+```go
+func MobileHideMiddle() string 
+```
+example:      
+```go
+lorem.MobileHideMiddle() // 132****6402
+```
+
+## Landline     
+return a random Chinese Mainland landline number      
+signature:     
+```go
+func Landline() string
+```
+example:    
+```go
+lorem.Landline() // 0711-3787929
+```

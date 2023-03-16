@@ -32,6 +32,22 @@ func TestInt(t *testing.T) {
 	is.Equal(n2, 0)
 }
 
+func TestIntBy(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	p1, err1 := IntBy(0, true)
+	p2, err2 := IntBy(2, true)
+	p3, err3 := IntBy(2, false)
+
+	is.Equal(p1, 0)
+	is.Error(err1)
+	is.LessOrEqual(p2, 99)
+	is.Nil(err2)
+	is.GreaterOrEqual(p3, -99)
+	is.Nil(err3)
+}
+
 func TestFloat32(t *testing.T) {
 	is := assert.New(t)
 
