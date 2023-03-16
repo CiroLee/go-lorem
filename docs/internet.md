@@ -28,7 +28,7 @@ func Tld() (tld, tldType string)
 ```
 example:    
 ```go
-lorem.Tld() // .gov iTLD
+tld, tldType := lorem.Tld() // .gov iTLD
 ```
 
 ## Url      

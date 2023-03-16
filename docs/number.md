@@ -28,8 +28,8 @@ func IntBy(digit uint, positive bool) (int, error)
 ``` 
 example:    
 ```go
-lorem.IntBy(3, true) // 235
-lorem.IntBy(3, false) // -374
+n,_ := lorem.IntBy(3, true) // 235
+n,_ := lorem.IntBy(3, false) // -374
 ```
 
 ## Float32     
