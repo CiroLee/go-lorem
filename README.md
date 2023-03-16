@@ -1,5 +1,5 @@
 # go-lorem
-> A pure function library of Golang for generating mock data
+> A golang library for generating mock data
 
 **note**: Not stable,still in rapid development
 ## install    
