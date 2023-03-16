@@ -13,7 +13,7 @@ n,_ := lorem.Unit(10, 100) // 14
 return a random int.       
 signature:   
 ```go
-func Int(min, max unit) int
+func Int(min, max unit) (int, error)
 ```
 example:     
 ```go
@@ -21,7 +21,7 @@ n,_ := lorem.Int(-10, 10) // -2
 ```
 
 ## IntBy      
-return a random int via special digit. if set `positive` true, will return a positive int number, and set false, return a negative int number           
+return a random int via special digit. If set `positive` true, will return a positive int number, and set false, return a negative int number           
 signature:     
 ```go
 func IntBy(digit uint, positive bool) (int, error)
