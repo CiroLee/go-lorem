@@ -1,6 +1,8 @@
 package lorem
 
 import (
+	cryptoRand "crypto/rand"
+	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -152,7 +154,6 @@ func Landline() string {
 	boolean := randomElement([]bool{true, false})
 	areaNum := randomElement(data.TEL_AREA_NUM)
 	if boolean {
-		// random, _ := randomInteger(100000, 9999999)
 		random, _ := IntBy(7, true)
 		num = areaNum + "-" + strconv.Itoa(random)
 	} else {
@@ -160,4 +161,27 @@ func Landline() string {
 		num = areaNum + "-" + strconv.Itoa(random)
 	}
 	return num
+}
+
+// return a random http method
+func HttpMethod() string {
+	return randomElement(data.HTTP_METHODS)
+}
+
+// return a random http status code
+func HttpStatusCode() int {
+	randomType := randomElement(data.HTTP_STATUS_TYPES)
+	return randomElement(data.HTTP_STATUS_CODE[randomType])
+}
+
+// return a random uuid that conforms to the RFC 4122
+func UUID() string {
+	uuid := make([]byte, 16)
+	_, err := cryptoRand.Read(uuid)
+	if err != nil {
+		return ""
+	}
+	uuid[6] = (uuid[6] & 0x0f) | 0x40
+	uuid[8] = (uuid[8] & 0x3f) | 0x80
+	return fmt.Sprintf("%x-%x-%x-%x-%x", uuid[0:4], uuid[4:6], uuid[6:8], uuid[8:10], uuid[10:])
 }

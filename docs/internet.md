@@ -31,6 +31,39 @@ example:
 tld, tldType := lorem.Tld() // .gov iTLD
 ```
 
+## HttpMethod        
+return a random http method     
+signature:     
+```go
+func HttpMethod() string
+```
+example:     
+```go
+m := lorem.HttpMethod() // GET
+```
+
+## HttpStatusCode       
+return a random http status code        
+signature:      
+```go
+func HttpStatusCode() int
+```
+example:     
+```go
+code := lorem.HttpStatusCode() // 200
+```
+
+## UUID      
+return a random uuid that conforms to the RFC 4122       
+signature:    
+```go
+func UUID() string
+```
+example:    
+```go
+uuid := lorem.UUID() // c41a39fc-3ccc-407a-8c50-44144b213cd6
+```
+
 ## Url      
 return a random url via the option struct            
 signature:    

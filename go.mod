@@ -3,7 +3,7 @@ module github.com/CiroLee/go-lorem
 go 1.20
 
 require (
-	github.com/CiroLee/gear v1.0.0
+	github.com/CiroLee/gear v1.0.1
 	github.com/stretchr/testify v1.8.2
 )
 

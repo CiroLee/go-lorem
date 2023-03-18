@@ -1,10 +1,12 @@
 package lorem
 
 import (
+	"regexp"
 	"strings"
 	"testing"
 
 	"github.com/CiroLee/gear/gearslice"
+	"github.com/CiroLee/go-lorem/data"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -93,4 +95,34 @@ func TestLandline(t *testing.T) {
 
 	is.LessOrEqual(len(r), 8)
 	is.GreaterOrEqual(len(r), 7)
+}
+
+func TestHttpMethod(t *testing.T) {
+	is := assert.New(t)
+
+	m := HttpMethod()
+	is.True(gearslice.Includes(data.HTTP_METHODS, m))
+}
+
+func TestHttpStatusCode(t *testing.T) {
+	is := assert.New(t)
+
+	code := HttpStatusCode()
+	is.LessOrEqual(code, 599)
+}
+
+func TestUUID(t *testing.T) {
+	is := assert.New(t)
+
+	uuid := UUID()
+	match, err := regexp.MatchString("[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}", uuid)
+	is.True(match)
+	is.Nil(err)
+
+	uuids := make(map[string]bool)
+	for i := 0; i < 1000; i++ {
+		uuid := UUID()
+		assert.False(t, uuids[uuid], "duplicate UUID generated: %s", uuid)
+		uuids[uuid] = true
+	}
 }
