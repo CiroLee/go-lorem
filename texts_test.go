@@ -84,7 +84,7 @@ func TestStrBySource(t *testing.T) {
 	is := assert.New(t)
 
 	source := "abcdefghijklmnopqrstuvwxyz"
-	s := StrBySource(4, source)
+	s := StrBy(4, source)
 
 	is.Len(s, 4)
 	is.True(unicode.Is(unicode.Latin, []rune(s)[0]))

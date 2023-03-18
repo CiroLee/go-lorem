@@ -1,5 +1,7 @@
 # go-lorem
-> A golang library for generating mock data
+> A golang library for generating mock data           
+
+[![codecov](https://codecov.io/gh/cirolee/go-lorem/branch/main/graph/badge.svg)](https://codecov.io/gh/cirolee/go-loren/branch/main) ![GitHub](https://img.shields.io/github/license/CiroLee/go-lorem)
 
 **note**: Not stable,still in rapid development
 ## install    

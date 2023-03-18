@@ -85,10 +85,11 @@ func Name(lang string, upper bool) string {
 
 // return a random string
 func Str(length uint) string {
-	return StrBySource(length, data.STRINGS)
+	return StrBy(length, data.STRINGS)
 }
 
-func StrBySource(length uint, source string) string {
+// return a random string using special source
+func StrBy(length uint, source string) string {
 	var str string
 	s := []rune(source)
 	lens := 4

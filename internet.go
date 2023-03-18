@@ -53,7 +53,7 @@ func Domain(level uint) string {
 	for i := 0; i < int(level); i++ {
 		random, _ := randomInteger(1, 10)
 		re := regexp.MustCompile("^-|-$")
-		tmp := StrBySource(uint(random), source)
+		tmp := StrBy(uint(random), source)
 		tmp = string(re.ReplaceAllString(tmp, Letter("en"))) + "."
 		str += tmp
 	}
@@ -119,7 +119,7 @@ func SimpleUrl() string {
 // return a random email
 func Email() string {
 	random, _ := randomInteger(1, data.BaseNum)
-	name := StrBySource(uint(random), data.NUMBER_ALPHABET)
+	name := StrBy(uint(random), data.NUMBER_ALPHABET)
 	emailSuffix := randomElement(data.EMAIL_SUFFIX)
 	return name + "/" + emailSuffix
 }

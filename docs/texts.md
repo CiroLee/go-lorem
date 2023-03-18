@@ -71,3 +71,13 @@ example:
 ```go
 lorem.Str(6) // *%=}P^
 ```
+## StrBy     
+return a random string using special source        
+signature:     
+```go
+func StrBy(length uint, source string) string
+```
+example:      
+```go
+d := lorem.StrBy(4, "abcdefghijklmnopqrstuvwxyz1234567890")  // htgp
+```
