@@ -22,10 +22,8 @@ func randomFloat(min, max float64, decimal uint) (float64, error) {
 	if max <= min {
 		return 0.0, fmt.Errorf("min must be less than max. min: %v, max: %v", min, max)
 	}
-	d := math.Pow10(4)
-	if decimal > 0 {
-		d = math.Pow10(int(decimal))
-	}
+
+	d := math.Pow10(int(decimal))
 
 	rand.New(rand.NewSource(time.Now().UnixNano()))
 	random := rand.Float64()*(max-min) + min
