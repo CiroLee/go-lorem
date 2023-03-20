@@ -21,6 +21,44 @@ func TestGenerateColorArray(t *testing.T) {
 	}))
 }
 
+func TestHexToRgb(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	c1, err1 := hexToRgb("#FFCDD2")
+	c2, err2 := hexToRgb("#@FFCDD2")
+	c3, err3 := hexToRgb("#fff")
+
+	is.Equal(c1, [3]float32{255, 205, 210})
+	is.Nil(err1)
+	is.Empty(c2)
+	is.Error(err2)
+	is.Equal(c3, [3]float32{255, 255, 255})
+	is.Nil(err3)
+}
+
+func TestExtractRgb(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	rgbarr1, err1 := extractRgb("rgb(255,255,255)")
+	rgbarr2, err2 := extractRgb("rgba(255,255,255,0.1)")
+	rgbarr3, err3 := extractRgb("rgb(255 255 255)")
+	rgbarr4, err4 := extractRgb("rgb(255 255 255 / 10%)")
+	rgbarr5, err5 := extractRgb("rgb( 244, 244, 244)")
+
+	is.Equal(rgbarr1, []float32{255, 255, 255})
+	is.Nil(err1)
+	is.Equal(rgbarr2, []float32{255, 255, 255, 0.1})
+	is.Nil(err2)
+	is.Equal(rgbarr3, []float32{255, 255, 255})
+	is.Nil(err3)
+	is.Equal(rgbarr4, []float32{255, 255, 255, 0.1})
+	is.Nil(err4)
+	is.Equal(rgbarr5, []float32{0, 0, 0})
+	is.Error(err5)
+
+}
 func TestHex(t *testing.T) {
 	t.Parallel()
 	is := assert.New(t)

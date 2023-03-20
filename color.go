@@ -3,9 +3,12 @@ package lorem
 import (
 	"fmt"
 	"math"
+	"regexp"
 	"strconv"
+	"strings"
 
 	"github.com/CiroLee/gear/gearslice"
+	"github.com/CiroLee/gear/gearstring"
 )
 
 // return a random hex color. set alpha true,will return a hex with alpha channel
@@ -114,4 +117,55 @@ func generateColorArray(red, green, blue [2]int) [3]int {
 	arr[2], _ = randomInteger(blue[0], blue[1])
 
 	return arr
+}
+
+func hexToRgb(hex string) ([3]float32, error) {
+	re := regexp.MustCompile("^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$")
+	hex = strings.ToLower(hex)
+	if !re.Match([]byte(hex)) {
+		return [3]float32{0, 0, 0}, fmt.Errorf("hex is an invalid hex color")
+	}
+	if len(hex) == 4 {
+		_hex := gearstring.Substring(hex, 1, len(hex))
+		hex = "#" + strings.Repeat(_hex, 2)
+	}
+	var rgb []float32
+	for i := 1; i < 7; i += 2 {
+		str16 := gearstring.Substring(hex, i, i+2)
+		c, _ := strconv.ParseInt(str16, 16, 32)
+		fmt.Printf("c: %v\n", c)
+		rgb = append(rgb, float32(c))
+	}
+	return [3]float32{rgb[0], rgb[1], rgb[2]}, nil
+}
+
+func extractRgb(rgb string) ([]float32, error) {
+	var color []string
+	rgbPrefixRe := regexp.MustCompile(`^(rgb|rgba|RGB|RGBA)\(`)
+	legacyMode := regexp.MustCompile(`^(?:rgb|rgba|RGB|RGBA)\((\d{1,3}),(\d{1,3}),(\d{1,3})(?:, ?([\d.]+))?\)$`) // rgb(123,123,123)
+	modernMode := regexp.MustCompile(`^(?:rgb|RGB)\((\s*\d{1,3}\s+){2}\s*\d{1,3}(?:\s*\/\s*([\d.]+%?))?\)$`)     // rgb(123 123 123)
+
+	if !legacyMode.Match([]byte(rgb)) && !modernMode.Match([]byte(rgb)) {
+		return []float32{0, 0, 0}, fmt.Errorf("rgb is an invalid rgb color")
+	}
+	tmp := rgbPrefixRe.ReplaceAllString(rgb, "")
+	if legacyMode.Match([]byte(rgb)) {
+		color = strings.Split(strings.Trim(tmp, ")"), ",")
+	} else {
+		color = strings.Split(strings.Trim(tmp, ")"), " ")
+		color = gearslice.Filter(color, func(el string, _ int) bool {
+			return el != "/" && el != ""
+		})
+	}
+	s := gearslice.Map(color, func(el string, _ int) float32 {
+		if strings.Contains(el, "%") {
+			float, _ := strconv.ParseFloat(strings.Replace(el, "%", "", -1), 32)
+			return float32(float / 100)
+		}
+		float, _ := strconv.ParseFloat(el, 32)
+		return float32(float)
+	})
+
+	fmt.Printf("color modern: %v\n", color)
+	return s, nil
 }
