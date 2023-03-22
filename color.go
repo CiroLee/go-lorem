@@ -196,7 +196,6 @@ func hexToRgb(hex string) ([3]float32, error) {
 	for i := 1; i < 7; i += 2 {
 		str16 := gearstring.Substring(hex, i, i+2)
 		c, _ := strconv.ParseInt(str16, 16, 32)
-		fmt.Printf("c: %v\n", c)
 		rgb = append(rgb, float32(c))
 	}
 	return [3]float32{rgb[0], rgb[1], rgb[2]}, nil
@@ -252,4 +251,11 @@ func rgbToHsl(rgb [3]float32) [3]float32 {
 		float32(math.Round(s*100) / 100),
 		float32(math.Round(l*100) / 100),
 	}
+}
+
+func isHex(str string) bool {
+	hexColorPattern := "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+	re := regexp.MustCompile(hexColorPattern)
+	matches := re.FindStringSubmatch(str)
+	return len(matches) > 0
 }
