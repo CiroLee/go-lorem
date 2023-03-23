@@ -183,9 +183,8 @@ func extractHSL(hsl string) ([]float32, error) {
 }
 
 func hexToRgb(hex string) ([3]float32, error) {
-	re := regexp.MustCompile("^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$")
 	hex = strings.ToLower(hex)
-	if !re.MatchString(hex) {
+	if !isHex(hex) {
 		return [3]float32{0, 0, 0}, fmt.Errorf("hex is an invalid hex color")
 	}
 	if len(hex) == 4 {
@@ -196,7 +195,6 @@ func hexToRgb(hex string) ([3]float32, error) {
 	for i := 1; i < 7; i += 2 {
 		str16 := gearstring.Substring(hex, i, i+2)
 		c, _ := strconv.ParseInt(str16, 16, 32)
-		fmt.Printf("c: %v\n", c)
 		rgb = append(rgb, float32(c))
 	}
 	return [3]float32{rgb[0], rgb[1], rgb[2]}, nil
@@ -252,4 +250,9 @@ func rgbToHsl(rgb [3]float32) [3]float32 {
 		float32(math.Round(s*100) / 100),
 		float32(math.Round(l*100) / 100),
 	}
+}
+
+func isHex(str string) bool {
+	re := regexp.MustCompile(`^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$`)
+	return re.MatchString(str)
 }
