@@ -218,3 +218,38 @@ func TestHSLAStr(t *testing.T) {
 	is.True(strings.HasPrefix(hsla2, "hsl"))
 	is.Equal(strings.Count(hsla2, "/"), 1)
 }
+
+func TestIsHex(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	type Colors struct {
+		value string
+		beHex bool
+	}
+	var colors = []Colors{
+		{
+			value: "#fff",
+			beHex: true,
+		},
+		{
+			value: "#ff0000",
+			beHex: true,
+		},
+		{
+			value: "#ff0000a8",
+			beHex: false,
+		},
+		{
+			value: "#FFF",
+			beHex: true,
+		},
+		{
+			value: "rgb(255 255 255)",
+			beHex: false,
+		},
+	}
+	for _, v := range colors {
+		is.Equal(isHex(v.value), v.beHex)
+	}
+}

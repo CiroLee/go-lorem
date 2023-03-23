@@ -47,11 +47,12 @@ func initSize(option Size) Size {
 func hexToHsl(hex string) ([3]float32, error) {
 	rgb, err := hexToRgb(hex)
 	if err != nil {
-		return rgb, nil
+		return rgb, err
 	}
 	return rgbToHsl(rgb), nil
 }
 
+// return a random placeholder image with pure color background
 func Placeholder(option PlaceholderOption) (string, error) {
 	if option.BgColor != "" && option.FontColor != "" && (!isHex(option.BgColor) || !isHex(option.FontColor)) {
 		return "", fmt.Errorf("BgColor or FontColor is not hex format color")
@@ -61,7 +62,6 @@ func Placeholder(option PlaceholderOption) (string, error) {
 	}
 	var size Size = initSize(Size{Width: option.Width, Height: option.Height})
 	bgHsl, _ := hexToHsl(option.BgColor)
-	fmt.Printf("bgHsl: %v\n", bgHsl)
 	dark := isDark(bgHsl)
 	if option.FontColor == "" {
 		if dark {
