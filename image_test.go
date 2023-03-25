@@ -72,3 +72,10 @@ func TestPlaceholder(t *testing.T) {
 	is.Contains(p6, "text=color")
 	is.NoError(err6)
 }
+
+func TestSimplePlaceholder(t *testing.T) {
+	is := assert.New(t)
+	p := SimplePlaceholder()
+
+	is.Contains(p, "text=image")
+}

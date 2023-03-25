@@ -77,3 +77,9 @@ func Placeholder(option PlaceholderOption) (string, error) {
 	}
 	return imgUrl, nil
 }
+
+// return a random placeholder image without params
+func SimplePlaceholder() string {
+	img, _ := Placeholder(PlaceholderOption{Text: "image"})
+	return img
+}

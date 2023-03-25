@@ -19,3 +19,14 @@ lorem.Placeholder(lorem.PlaceholderOption{})  // https://dummyimage.com/563x688/
 lorem.Placeholder(lorem.PlaceholderOption{Width: 100}) // https://dummyimage.com/100x100/31b6c6
 lorem.Placeholder(lorem.PlaceholderOption{Text: "hahaha"}) // https://dummyimage.com/449x772/67320c/ffffff&text=hahaha
 ```
+
+## SimplePlaceholder        
+return a random placeholder image without params        
+signature:     
+```go
+func SimplePlaceholder() string
+```
+example:     
+```go
+lorem.SimplePlaceholder() // https://dummyimage.com/563x688/ffffff&text=image 
+```
