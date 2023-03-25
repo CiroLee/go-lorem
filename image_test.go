@@ -1,6 +1,7 @@
 package lorem
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -29,10 +30,10 @@ func TestInitSize(t *testing.T) {
 	is.Equal(size1, Size{100, 100})
 	is.Equal(size2, Size{100, 100})
 	is.Equal(size3, Size{100, 100})
-	is.LessOrEqual(size4.Width, 1024)
-	is.LessOrEqual(size4.Height, 1024)
-	is.GreaterOrEqual(size4.Height, 320)
-	is.GreaterOrEqual(size4.Width, 320)
+	is.LessOrEqual(size4.Width, uint(1024))
+	is.LessOrEqual(size4.Height, uint(1024))
+	is.GreaterOrEqual(size4.Height, uint(320))
+	is.GreaterOrEqual(size4.Width, uint(320))
 }
 
 func TestHexToHsl(t *testing.T) {
@@ -78,4 +79,24 @@ func TestSimplePlaceholder(t *testing.T) {
 	p := SimplePlaceholder()
 
 	is.Contains(p, "text=image")
+}
+
+func TestPicsum(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	p1 := Picsum(PicsumOption{})
+	p2 := Picsum(PicsumOption{Width: 200})
+	p3 := Picsum(PicsumOption{Grayscale: true})
+	p4 := Picsum(PicsumOption{Blur: 2, Grayscale: true})
+	p5 := Picsum(PicsumOption{Blur: 2, Grayscale: false})
+	p6 := SimplePicsum()
+
+	is.Equal(strings.Count(p1, "/"), 4)
+	is.Equal(strings.Count(p2, "200"), 2)
+	is.True(strings.HasSuffix(p3, "?grayscale"))
+	is.Contains(p4, "?grayscale")
+	is.True(strings.HasSuffix(p4, "&blur=2"))
+	is.True(strings.HasSuffix(p5, "?blur=2"))
+	is.Equal(strings.Count(p6, "/"), 4)
 }

@@ -30,3 +30,35 @@ example:
 ```go
 lorem.SimplePlaceholder() // https://dummyimage.com/563x688/ffffff&text=image 
 ```
+
+## Picsum      
+return a random image from unSplash by special param struct        
+signature:      
+```go
+func Picsum(option PicsumOption) string
+
+type PicsumOption struct {
+	Width     uint  // width of the image. default between 320 and 1024
+	Height    uint  // Height of the image. default between 320 and 1024
+	Grayscale bool  // is grayscale image
+	Blur      uint  // blur value. min is 1 and max is 10
+}
+```
+example:      
+```go
+lorem.Picsum(lorem.PicsumOption{Grayscale: true, Width: 100, Height: 200, Blur: 2})
+// https://picsum.photos/100/200?grayscale&blur=2
+lorem.Picsum(lorem.PicsumOption{Width: 100})
+// https://picsum.photos/100/100
+```
+
+## SimplePicsum       
+simple use of Picsum. return a random image from unSplash without params            
+signature:      
+```go
+func SimplePicsum() string
+```
+example:     
+```go
+lorem.SimplePicsum() // https://picsum.photos/581/797
+```
