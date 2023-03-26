@@ -37,54 +37,6 @@ func TestHexToRgb(t *testing.T) {
 	is.Nil(err3)
 }
 
-func TestExtractRgb(t *testing.T) {
-	t.Parallel()
-	is := assert.New(t)
-
-	rgbarr1, err1 := extractRgb("rgb(255,255,255)")
-	rgbarr2, err2 := extractRgb("rgba(255,255,255,0.1)")
-	rgbarr3, err3 := extractRgb("rgb(255 255 255)")
-	rgbarr4, err4 := extractRgb("rgb(255 255 255 / 10%)")
-	rgbarr5, err5 := extractRgb("rgb( 244, 244, 244)")
-
-	is.Equal(rgbarr1, []float32{255, 255, 255})
-	is.Nil(err1)
-	is.Equal(rgbarr2, []float32{255, 255, 255, 0.1})
-	is.Nil(err2)
-	is.Equal(rgbarr3, []float32{255, 255, 255})
-	is.Nil(err3)
-	is.Equal(rgbarr4, []float32{255, 255, 255, 0.1})
-	is.Nil(err4)
-	is.Equal(rgbarr5, []float32{0, 0, 0})
-	is.Error(err5)
-
-}
-
-func TestExtractHSL(t *testing.T) {
-	t.Parallel()
-	is := assert.New(t)
-
-	hsl1, err1 := extractHSL("hsl(100deg,12%,12%)")
-	hsl2, err2 := extractHSL("hsla(100deg,12%,12%,0.12)")
-	hsl3, err3 := extractHSL("hsl(100deg 12% 12%)")
-	hsl4, err4 := extractHSL("hsl(100deg 12% 12% / 12%)")
-	hsl5, err5 := extractHSL("hsl(100 12% 12%)")
-	hsl6, err6 := extractHSL("HSL(100 12% 12)")
-
-	is.Equal(hsl1, []float32{100, 12, 12})
-	is.NoError(err1)
-	is.Equal(hsl2, []float32{100, 12, 12, 0.12})
-	is.NoError(err2)
-	is.Equal(hsl3, []float32{100, 12, 12})
-	is.NoError(err3)
-	is.Equal(hsl4, []float32{100, 12, 12, 0.12})
-	is.NoError(err4)
-	is.Equal(hsl5, []float32{0, 0, 0})
-	is.Error(err5)
-	is.Equal(hsl6, []float32{0, 0, 0})
-	is.Error(err6)
-}
-
 func TestRgbToHex(t *testing.T) {
 	is := assert.New(t)
 

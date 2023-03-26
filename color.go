@@ -122,66 +122,6 @@ func generateColorArray(red, green, blue [2]int) [3]int {
 	return arr
 }
 
-func extractRgb(rgb string) ([]float32, error) {
-	var color []string
-	rgbPrefixRe := regexp.MustCompile(`^(rgb|rgba|RGB|RGBA)\(`)
-	legacyMode := regexp.MustCompile(`^(?:rgb|rgba|RGB|RGBA)\((\d{1,3}),(\d{1,3}),(\d{1,3})(?:, ?([\d.]+))?\)$`) // rgb(123,123,123)
-	modernMode := regexp.MustCompile(`^(?:rgb|RGB)\((\s*\d{1,3}\s+){2}\s*\d{1,3}(?:\s*\/\s*([\d.]+%?))?\)$`)     // rgb(123 123 123)
-
-	if !legacyMode.MatchString(rgb) && !modernMode.MatchString(rgb) {
-		return []float32{0, 0, 0}, fmt.Errorf("rgb is an invalid rgb color")
-	}
-	tmp := rgbPrefixRe.ReplaceAllString(rgb, "")
-	if legacyMode.MatchString(rgb) {
-		color = strings.Split(strings.Trim(tmp, ")"), ",")
-	} else {
-		color = strings.Split(strings.Trim(tmp, ")"), " ")
-		color = gearslice.Filter(color, func(el string, _ int) bool {
-			return el != "/" && el != ""
-		})
-	}
-	s := gearslice.Map(color, func(el string, _ int) float32 {
-		if strings.Contains(el, "%") {
-			float, _ := strconv.ParseFloat(strings.Replace(el, "%", "", -1), 32)
-			return float32(float / 100)
-		}
-		float, _ := strconv.ParseFloat(el, 32)
-		return float32(float)
-	})
-
-	return s, nil
-}
-
-func extractHSL(hsl string) ([]float32, error) {
-	var color []string
-	hslPrefixRe := regexp.MustCompile(`^(hsl|hsla|HSL|HSLA)\(`)
-	legacyMode := regexp.MustCompile(`^(hsl|hsla|HSL|HSLA)\(((0|[1-9]\d*)deg),((100|[1-9]\d?)(\.\d+)?%),((100|[1-9]\d?)(\.\d+)?%)(,(0\.\d+|1|0))? *\)$`)
-	modernMode := regexp.MustCompile(`^(hsl|HSL)\((0?\d{1,2}|1[0-9]{2}|2[0-9]{1,2}|3[0-5]\d|360)deg\s(0?\d{1,2}|100)%\s(0?\d{1,2}|100)%(\s/\s(0?\d{1,2}|100)%)?\)$`)
-
-	if !legacyMode.MatchString(hsl) && !modernMode.MatchString(hsl) {
-		return []float32{0, 0, 0}, fmt.Errorf("hsl is an invalid hsl color")
-	}
-	tmp := hslPrefixRe.ReplaceAllString(hsl, "")
-	if legacyMode.MatchString(hsl) {
-		color = strings.Split(strings.Trim(tmp, ")"), ",")
-	} else {
-		color = strings.Split(strings.Trim(tmp, ")"), " ")
-		color = gearslice.Filter(color, func(el string, _ int) bool {
-			return el != "/" && el != ""
-		})
-	}
-	s := gearslice.Map(color, func(el string, index int) float32 {
-		el = strings.Replace(el, "deg", "", -1)
-		if strings.Contains(el, "%") && index == 3 {
-			float, _ := strconv.ParseFloat(strings.Replace(el, "%", "", -1), 32)
-			return float32(float / 100)
-		}
-		float, _ := strconv.ParseFloat(strings.Replace(el, "%", "", -1), 32)
-		return float32(float)
-	})
-	return s, nil
-}
-
 func hexToRgb(hex string) ([3]float32, error) {
 	hex = strings.ToLower(hex)
 	if !isHex(hex) {
