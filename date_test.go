@@ -7,6 +7,7 @@ import (
 	"time"
 	"unicode"
 
+	"github.com/CiroLee/go-lorem/consts"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -67,6 +68,6 @@ func TestFormatDate(t *testing.T) {
 	from := time.Date(2022, time.Month(1), 1, 0, 0, 0, 0, time.Now().Location())
 	to := time.Date(2023, time.Month(12), 31, 0, 0, 0, 0, time.Now().Location())
 
-	fd := FormatDate(from, to, SlashLayout)
+	fd := FormatDate(from, to, consts.SlashLayout)
 	is.True(strings.Contains(fd, "/"))
 }

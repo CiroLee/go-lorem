@@ -62,3 +62,37 @@ example:
 ```go
 lorem.SimplePicsum() // https://picsum.photos/581/797
 ```
+
+## Classify       
+return a random image classified image       
+signature:      
+```go
+func Classify(option ClassifyOption) string
+
+type ClassifyOption struct {
+	Type   string    // image type. you can use built-in type consts, such as consts.ImageAnimals
+	Width  uint      // width of the image. default between 320 and 1024
+	Height uint      // Height of the image. default between 320 and 1024
+	Lock   bool      // set Lock true, the server will return the cache image
+}
+```
+example:      
+```go
+import (
+	"github.com/CiroLee/go-lorem/consts"
+)
+
+lorem.Classify(lorem.ClassifyOption{ Type: consts.ImageAnimals })
+// https://loremflickr.com/463/611/animals
+```
+
+## SimpleClassify      
+simple use of Classify without params          
+signature:      
+```go
+func SimpleClassify() string
+```
+example:     
+```go
+lorem.SimpleClassify() // https://loremflickr.com/463/611/animals
+```

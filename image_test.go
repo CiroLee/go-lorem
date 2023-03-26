@@ -4,6 +4,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/CiroLee/go-lorem/consts"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -99,4 +100,18 @@ func TestPicsum(t *testing.T) {
 	is.True(strings.HasSuffix(p4, "&blur=2"))
 	is.True(strings.HasSuffix(p5, "?blur=2"))
 	is.Equal(strings.Count(p6, "/"), 4)
+}
+
+func TestClassify(t *testing.T) {
+	t.Parallel()
+	is := assert.New(t)
+
+	p1 := Classify(ClassifyOption{Type: consts.ImageAnimals})
+	p2 := Classify(ClassifyOption{Type: consts.ImageAnimals, Lock: true})
+	p3 := SimpleClassify()
+
+	is.True(strings.HasSuffix(p1, "animals"))
+	is.Contains(p2, "animals")
+	is.Contains(p2, "?lock")
+	is.Equal(strings.Count(p3, "/"), 4)
 }

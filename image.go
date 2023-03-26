@@ -33,6 +33,13 @@ type PicsumOption struct {
 	Blur      uint
 }
 
+type ClassifyOption struct {
+	Type   string
+	Width  uint
+	Height uint
+	Lock   bool
+}
+
 func isDark(hsl Hsl) bool {
 	return hsl[2] < 0.5
 }
@@ -122,4 +129,20 @@ func Picsum(option PicsumOption) string {
 // return a random image. simple use of Picsum without params
 func SimplePicsum() string {
 	return Picsum(PicsumOption{})
+}
+
+// return a random image classified image
+func Classify(option ClassifyOption) string {
+	var size = initSize(Size{option.Width, option.Height})
+	baseUrl := gearstring.Contact(loremflicker_url, "/", strconv.Itoa(int(size.Width)), "/", strconv.Itoa(int(size.Height)), "/", option.Type)
+	if option.Lock {
+		lockNum, _ := randomInteger(10000, 99999)
+		return baseUrl + "?lock=" + strconv.Itoa(lockNum)
+	}
+	return strings.TrimRight(baseUrl, "/")
+}
+
+// simple use of Classify without params
+func SimpleClassify() string {
+	return Classify(ClassifyOption{})
 }
