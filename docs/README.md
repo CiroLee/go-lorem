@@ -7,3 +7,4 @@
 [color](./color.md)
 [image](./image.md)
 [helper](./helper.md)
+[unique](./unique.md)
