@@ -3856,6 +3856,6 @@ var COMMON_EN_NAMES []string = []string{
 	"yvonne",
 	"zachary",
 }
-var NUMBER = "0123456789"
+var NUMBER_STR = "0123456789"
 var NUMBER_ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 var STRINGS = NUMBER_ALPHABET + "@#$%^&*~()-+=_;:/![]{}<>"

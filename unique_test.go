@@ -18,3 +18,16 @@ func TestVrm(t *testing.T) {
 	is.LessOrEqual(len(v), 11)
 	is.GreaterOrEqual(len(v), 8)
 }
+
+func TestVin(t *testing.T) {
+	is := assert.New(t)
+	vin := Vin()
+	is.Len(vin, 17)
+}
+
+func TestId(t *testing.T) {
+	is := assert.New(t)
+
+	id := Id()
+	is.Len(id, 18)
+}
