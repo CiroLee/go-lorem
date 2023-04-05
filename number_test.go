@@ -39,6 +39,7 @@ func TestIntBy(t *testing.T) {
 	p1, err1 := IntBy(0, true)
 	p2, err2 := IntBy(2, true)
 	p3, err3 := IntBy(2, false)
+	p4, err4 := IntBy(1, true)
 
 	is.Equal(p1, 0)
 	is.Error(err1)
@@ -46,6 +47,9 @@ func TestIntBy(t *testing.T) {
 	is.Nil(err2)
 	is.GreaterOrEqual(p3, -99)
 	is.Nil(err3)
+	is.LessOrEqual(p4, 9)
+	is.GreaterOrEqual(p4, 0)
+	is.NoError(err4)
 }
 
 func TestFloat32(t *testing.T) {

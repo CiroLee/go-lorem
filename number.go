@@ -30,7 +30,10 @@ func IntBy(digit uint, positive bool) (int, error) {
 		return 0, fmt.Errorf("digit must be greater than zero")
 	}
 	for i := 0; i < int(digit); i++ {
-		if i == 0 {
+		if i == 0 && digit == 1 {
+			random, _ := randomInteger(0, 9)
+			num = strconv.Itoa(random)
+		} else if i == 0 && digit != 1 {
 			random, _ := randomInteger(1, 9)
 			num = strconv.Itoa(random)
 		} else {
