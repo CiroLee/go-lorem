@@ -3,7 +3,6 @@
 
 [![codecov](https://codecov.io/gh/cirolee/go-lorem/branch/main/graph/badge.svg)](https://codecov.io/gh/cirolee/go-lorem/branch/main) ![GitHub](https://img.shields.io/github/license/CiroLee/go-lorem)
 
-**note**: Not stable,still in rapid development
 ## install    
 ```shell
 go get github.com/CiroLee/go-lorem

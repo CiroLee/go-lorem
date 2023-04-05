@@ -76,8 +76,8 @@ func TestLongAndLat(t *testing.T) {
 	t.Parallel()
 	is := assert.New(t)
 
-	v1 := LongAngLat("deg")
-	v2 := LongAngLat("dms")
+	v1 := LongAndLat("deg")
+	v2 := LongAndLat("dms")
 
 	for _, v := range v1 {
 		is.Contains(v, "°")

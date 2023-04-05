@@ -126,3 +126,10 @@ func TestUUID(t *testing.T) {
 		uuids[uuid] = true
 	}
 }
+
+func TestProtocol(t *testing.T) {
+	is := assert.New(t)
+	p := Protocol()
+
+	is.True(gearslice.Includes(data.PROTOCOL, p))
+}

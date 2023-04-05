@@ -58,11 +58,11 @@ example:
 lorem.ZipCode() // 460986
 ```
 
-## LongAngLat        
+## LongAndLat        
 return a random longitude and latitude array.support deg format and dms format                   
 signature:        
 ```go
-func LongAngLat(format string) [2]string
+func LongAndLat(format string) [2]string
 ```
 example:      
 ```go

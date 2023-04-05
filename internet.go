@@ -63,24 +63,6 @@ func Domain(level uint) string {
 	return strings.TrimRight(str, ".") + tld
 }
 
-// generate a random sub-directory string at special sub level. At least one layer
-func subDirectory(sub uint) string {
-	var (
-		result string
-		length uint = 1
-	)
-	if sub > 0 {
-		length = sub
-	}
-	for i := 0; i < int(length); i++ {
-		random, _ := randomInteger(1, 6)
-		w := "/" + Word(uint(random), "en")
-		result += w
-	}
-
-	return result
-}
-
 // return a random url via the option struct
 /*
  type UrlOption struct {
@@ -116,6 +98,11 @@ func SimpleUrl() string {
 		Protocol: "https",
 		Suffix:   ".com",
 	})
+}
+
+// return a random web protocol
+func Protocol() string {
+	return randomElement(data.PROTOCOL)
 }
 
 // return a random email
@@ -184,4 +171,22 @@ func UUID() string {
 	uuid[6] = (uuid[6] & 0x0f) | 0x40
 	uuid[8] = (uuid[8] & 0x3f) | 0x80
 	return fmt.Sprintf("%x-%x-%x-%x-%x", uuid[0:4], uuid[4:6], uuid[6:8], uuid[8:10], uuid[10:])
+}
+
+// generate a random sub-directory string at special sub level. At least one layer
+func subDirectory(sub uint) string {
+	var (
+		result string
+		length uint = 1
+	)
+	if sub > 0 {
+		length = sub
+	}
+	for i := 0; i < int(length); i++ {
+		random, _ := randomInteger(1, 6)
+		w := "/" + Word(uint(random), "en")
+		result += w
+	}
+
+	return result
 }

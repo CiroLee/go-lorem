@@ -58,7 +58,7 @@ func ZipCode() int {
 }
 
 // return a random longitude and latitude array. support deg format and dms format
-func LongAngLat(format string) [2]string {
+func LongAndLat(format string) [2]string {
 	longitude, _ := randomFloat(-100, 100, 4)
 	latitude, _ := randomFloat(-90, 90, 4)
 
