@@ -41,3 +41,29 @@ example:
 ```go
 lorem.Version() // 6.34.12
 ```
+
+## Password      
+return a random password,support specified length and strength(low, medium, high)                     
+signature:       
+```go
+func Password(length uint, strength string) string
+```
+
+example:        
+```go
+lorem.Password(12, "low") // pvljwcssbdbt
+lorem.Pasword(12, "medium") // zl22LdITIdcI
+lorem.Password(12, "high") // yCH7LsmWQsA!
+```
+
+## MD5       
+return a random md5 string           
+signature:        
+```go
+func MD5() string
+```
+
+example:       
+```go
+lorem.MD5() // 7755d659cbc55125faa2384e90dc7ff7
+```

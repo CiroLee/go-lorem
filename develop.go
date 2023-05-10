@@ -30,6 +30,27 @@ func Version() string {
 	return fmt.Sprintf("%d.%d.%d", major, minor, patch)
 }
 
+// return a random md5
+func MD5() string {
+	var str = "0123456789abcdef"
+	return StrBy(32, str)
+}
+
+// return a random password. support specified length and strength
+func Password(length uint, strength string) string {
+	var base = "abcdefghijklmnopqrstuvwxyz"
+	var chars string
+	switch strength {
+	case "low":
+		chars = base
+	case "medium":
+		chars = base + "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	case "high":
+		chars = base + "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~!@#$%^&*()_+{}[]:;<>,.?/"
+	}
+	return StrBy(length, chars)
+}
+
 func sha(length uint) string {
 	str := "0123456789abcdefABCDEF"
 	return StrBy(length, str)
