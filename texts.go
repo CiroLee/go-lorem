@@ -50,7 +50,7 @@ func Sentence(num uint, lang string) string {
 	return gearstring.ToUpperCase(strings.TrimRight(str, trail))
 }
 
-// return a random paragraph. At lease consists one sentence
+// return a random paragraph. At lease contains one sentence
 func Paragraph(num uint, lang string) string {
 	var str string
 	var length uint = 1

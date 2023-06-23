@@ -35,7 +35,7 @@ lorem.Sentence(2, "zh") // 泡缸弓，等兄
 ```
 
 ## Paragraph     
-return a random paragraph consisting of `num` of sentences. At least two 1 sentence      
+return a random paragraph consisting of `num` of sentences. At least contains one sentence      
 signature:    
 ```go
 func Paragraph(num unit, lang string) string
