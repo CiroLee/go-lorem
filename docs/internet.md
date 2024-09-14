@@ -64,6 +64,14 @@ example:
 uuid := lorem.UUID() // c41a39fc-3ccc-407a-8c50-44144b213cd6
 ```
 
+## NanoId    
+return a random nano id width special size  
+
+example:    
+```go
+nanoid := lorem.NanoId(12) // dNiW0FO4fFey
+```
+
 ## Url      
 return a random url via the option struct            
 signature:    

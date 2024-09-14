@@ -133,3 +133,36 @@ func TestProtocol(t *testing.T) {
 
 	is.True(gearslice.Includes(data.PROTOCOL, p))
 }
+
+func TestNanoId(t *testing.T) {
+	tests := []struct {
+		size       int
+		shouldFail bool
+	}{
+		{size: 21, shouldFail: false},
+		{size: 0, shouldFail: true},
+		{size: 1, shouldFail: false},
+	}
+
+	for _, v := range tests {
+		t.Run("sizeText", func(t *testing.T) {
+			id := NanoId(v.size)
+			if v.shouldFail {
+				assert.Empty(t, id, "Expected empty Id for invalid size")
+			} else {
+				assert.Equal(t, v.size, len(id), "Expected Id of size %d, got %d")
+				for _, char := range id {
+					assert.True(t, isValidChar(char), "Invalid character in Id: %c")
+				}
+			}
+		})
+	}
+}
+func isValidChar(c rune) bool {
+	for _, validChar := range alphabet {
+		if c == validChar {
+			return true
+		}
+	}
+	return false
+}

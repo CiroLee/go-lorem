@@ -3,9 +3,11 @@ package lorem
 import (
 	cryptoRand "crypto/rand"
 	"fmt"
+	"math/rand"
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/CiroLee/gear/gearstring"
 	"github.com/CiroLee/go-lorem/data"
@@ -171,6 +173,18 @@ func UUID() string {
 	uuid[6] = (uuid[6] & 0x0f) | 0x40
 	uuid[8] = (uuid[8] & 0x3f) | 0x80
 	return fmt.Sprintf("%x-%x-%x-%x-%x", uuid[0:4], uuid[4:6], uuid[6:8], uuid[8:10], uuid[10:])
+}
+
+const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-"
+
+// return a random NanoId
+func NanoId(size int) string {
+	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
+	id := make([]byte, size)
+	for i := 0; i < size; i++ {
+		id[i] = alphabet[rng.Intn(len(alphabet))]
+	}
+	return string(id)
 }
 
 // generate a random sub-directory string at special sub level. At least one layer
