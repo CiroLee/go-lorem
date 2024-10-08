@@ -47,12 +47,30 @@ func TestCounty(t *testing.T) {
 	is.Equal(reflect.TypeOf(c.Name).Kind(), reflect.String)
 }
 
+func TestRoad(t *testing.T) {
+	is := assert.New(t)
+	r := Road()
+	is.NotEmpty(r)
+}
+
 func TestAddress(t *testing.T) {
 	is := assert.New(t)
-	address := Address()
+	addressGap := Address(true)
+	addressNoGap := Address(false)
 
-	length := len(strings.Split(address, " "))
+	length := len(strings.Split(addressGap, " "))
 	is.LessOrEqual(length, 3)
+	is.NotEmpty(addressNoGap)
+}
+
+func TestFullAddress(t *testing.T) {
+	is := assert.New(t)
+	addressGap := FullAddress(true)
+	addressNoGap := FullAddress(false)
+
+	length := len(strings.Split(addressGap, " "))
+	is.LessOrEqual(length, 5)
+	is.NotEmpty(addressNoGap)
 }
 
 func TestZipCode(t *testing.T) {

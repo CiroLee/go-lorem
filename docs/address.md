@@ -37,16 +37,27 @@ lorem.County() // {370911 岱岳区}
 ```
 
 ## Address        
-return a random Chinese Mainland address string that include province, city and county, separated by space          
+return a random Chinese Mainland address string that include province, city and county, set gap true,will separated by space          
 signature:      
 ```go
-func Address() string
+func Address(gap bool) string
 ```
 example:       
 ```go
-lorem.Address() // 浙江省 台州市 路桥区
+lorem.Address(true) // 浙江省 台州市 路桥区
 ```
 
+## FullAddress     
+return a random whole Chinese address width province, city, county, road and door number      
+signature:
+```go
+func FullAddress(gap bool) string
+```
+
+example: 
+```go
+lorem.FullAddress(true) // 浙江省 台州市 路桥区 河东路 123
+```
 ## ZipCode         
 return a random Chinese Mainland zip code          
 signature:       

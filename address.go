@@ -10,6 +10,8 @@ import (
 	"github.com/CiroLee/go-lorem/data"
 )
 
+var roadName = []string{"路", "街", "巷", "大道", "胡同"}
+
 type AddressBase struct {
 	Code string
 	Name string
@@ -41,14 +43,40 @@ func County() AddressBase {
 	return randomCounty(province.Code, city.Code)
 }
 
+// return a random Chinese road name
+func Road() string {
+	integer, _ := Int(2, 4)
+	var unit = Elements(roadName, 1)[0]
+	var zhString = Word(uint(integer), "zh")
+
+	return zhString + unit
+
+}
+
 // return a random Chinese Mainland address string that include province, city and county, separated by space
-func Address() string {
+func Address(gap bool) string {
 	var province = Province()
 	var city = randomCity(province.Code)
 	var county = randomCounty(province.Code, city.Code)
 
-	var address = province.Name + " " + city.Name + " " + county.Name
+	var address string
+	if gap {
+		address = province.Name + " " + city.Name + " " + county.Name
+	} else {
+		address = province.Name + city.Name + county.Name
+	}
 	return strings.TrimRight(address, " ")
+}
+
+// return a random whole Chinese address width province, city, county, road and door number
+func FullAddress(gap bool) string {
+	address := Address(gap)
+	road := Road()
+	doorNumber := StrBy(4, "0123456789")
+	if gap {
+		return address + " " + road + " " + doorNumber
+	}
+	return address + road + doorNumber
 }
 
 // return a random Chinese Mainland zip code
